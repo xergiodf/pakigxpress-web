@@ -3,9 +3,9 @@ import React from 'react';
 import logoDark from '../assets/img/logo-dark.png';
 import logoLight from '../assets/img/logo-light.png';
 
-const NavContainer = () => (
+const NavContainer = props => (
   <div className="nav-container">
-    <nav>
+    <nav className={props.transparent ? 'absolute transparent' : ''}>
       <div className="nav-bar">
         <div className="module left">
           <a href="index.html">
