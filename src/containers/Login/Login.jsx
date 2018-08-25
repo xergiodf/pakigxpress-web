@@ -1,7 +1,7 @@
-import React, { Fragment } from 'react';
-import NavContainer from '../NavContainer';
-import FooterContainer from '../FooterContainer';
-import PageTitle from '../../components/PageTitle';
+import React, { Fragment } from 'react'
+import NavContainer from '../NavContainer'
+import FooterContainer from '../FooterContainer'
+import PageTitle from '../../components/PageTitle'
 
 const Login = () => (
   <Fragment>
@@ -13,14 +13,23 @@ const Login = () => (
           <div className="col-md-6 col-md-push-3">
             <form className="form-email">
               <h6 className="uppercase text-center">Log In</h6>
-              <input type="text" className="validate-required" name="name" placeholder="Email" />
+              <input
+                type="text"
+                className="validate-required"
+                name="name"
+                placeholder="Email"
+              />
               <input
                 type="text"
                 className="validate-required validate-email"
                 name="email"
                 placeholder="Password"
               />
-              <a style={{ width: '100%' }} className="btn btn-lg btn-filled" href="dashboard.html">
+              <a
+                style={{ width: '100%' }}
+                className="btn btn-lg btn-filled"
+                href="dashboard.html"
+              >
                 {' '}
                 Log In
               </a>
@@ -38,6 +47,6 @@ const Login = () => (
       <FooterContainer />
     </div>
   </Fragment>
-);
+)
 
-export default Login;
+export default Login

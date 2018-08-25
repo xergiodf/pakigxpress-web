@@ -1,12 +1,15 @@
-import React from 'react';
+import React from 'react'
 
-import cover from '../assets/img/cover.jpg';
+import cover from '../assets/img/cover.jpg'
 
 const PageTitle = props => (
   <section className="page-title page-title-3 image-bg overlay parallax">
     <div
       className="background-image-holder fadeIn"
-      style={{ transform: 'translate3d(0px, 0px, 0px)', backgroundImage: `url(${cover})` }}
+      style={{
+        transform: 'translate3d(0px, 0px, 0px)',
+        backgroundImage: `url(${cover})`,
+      }}
     />
     <div className="container">
       <div className="row">
@@ -16,6 +19,6 @@ const PageTitle = props => (
       </div>
     </div>
   </section>
-);
+)
 
-export default PageTitle;
+export default PageTitle

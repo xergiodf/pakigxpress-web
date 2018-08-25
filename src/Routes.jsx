@@ -1,6 +1,6 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { Dashboard, NewOrder, Login, Signup } from './containers/';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import { Dashboard, NewOrder, Login, Signup } from './containers/'
 
 const Routes = () => (
   <Switch>
@@ -9,6 +9,6 @@ const Routes = () => (
     <Route exact path="/login" component={Login} />
     <Route exact path="/signup" component={Signup} />
   </Switch>
-);
+)
 
-export default Routes;
+export default Routes

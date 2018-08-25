@@ -6,7 +6,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server -d",
     "build": "cross-env NODE_ENV=production webpack -p",
-    "test": "jest"
+    "test": "jest",
+    "format": "yarn prettier --config .prettierrc --write \"src/**/*.js*\"",
+    "lint": "yarn eslint --config .eslintrc --fix 'src/**/**/*.js' "
   },
   "keywords": [],
   "author": "",
@@ -46,6 +48,7 @@
     "enzyme-adapter-react-16": "^1.2.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.6.2",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",

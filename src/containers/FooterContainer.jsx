@@ -1,6 +1,6 @@
-import React from 'react';
+import React from 'react'
 
-import logoLight from '../assets/img/logo-light.png';
+import logoLight from '../assets/img/logo-light.png'
 
 const FooterContainer = () => (
   <footer className="footer-2 bg-dark">
@@ -12,7 +12,9 @@ const FooterContainer = () => (
           </a>
         </div>
         <div className="col-sm-4 text-center">
-          <span className="fade-half">© Copyright 2018 PakigXpress - All Rights Reserved</span>
+          <span className="fade-half">
+            © Copyright 2018 PakigXpress - All Rights Reserved
+          </span>
         </div>
         <div className="col-sm-4 text-right">
           <ul className="list-inline social-list">
@@ -41,6 +43,6 @@ const FooterContainer = () => (
       </div>
     </div>
   </footer>
-);
+)
 
-export default FooterContainer;
+export default FooterContainer

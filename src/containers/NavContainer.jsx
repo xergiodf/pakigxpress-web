@@ -1,7 +1,8 @@
-import React from 'react';
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-import logoDark from '../assets/img/logo-dark.png';
-import logoLight from '../assets/img/logo-light.png';
+import logoDark from '../assets/img/logo-dark.png'
+import logoLight from '../assets/img/logo-light.png'
 
 const NavContainer = props => (
   <div className="nav-container">
@@ -20,13 +21,13 @@ const NavContainer = props => (
           <div className="module left">
             <ul className="menu">
               <li>
-                <a href="index.html">Home</a>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
-                <a href="calculate.html">Calculate Package</a>
+                <NavLink to="/">Calculate Package</NavLink>
               </li>
               <li>
-                <a href="contact.html">Contact</a>
+                <NavLink to="/">Contact</NavLink>
               </li>
             </ul>
           </div>
@@ -41,6 +42,6 @@ const NavContainer = props => (
       </div>
     </nav>
   </div>
-);
+)
 
-export default NavContainer;
+export default NavContainer

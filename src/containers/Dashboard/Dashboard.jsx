@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
-import NavContainer from '../NavContainer';
-import FooterContainer from '../FooterContainer';
+import React, { Fragment } from 'react'
+import NavContainer from '../NavContainer'
+import FooterContainer from '../FooterContainer'
 
 const Dashboard = () => (
   <Fragment>
@@ -35,7 +35,10 @@ const Dashboard = () => (
               </div>
             </div>
             <div className="col-sm-4">
-              <div className="feature feature-1 boxed" style={{ minHeight: '300px' }}>
+              <div
+                className="feature feature-1 boxed"
+                style={{ minHeight: '300px' }}
+              >
                 <div className="text-center mt48">
                   <h4 className="mb32">Calculate an Order</h4>
                   <form
@@ -55,7 +58,10 @@ const Dashboard = () => (
               </div>
             </div>
             <div className="col-sm-4">
-              <div className="feature feature-1 boxed" style={{ minHeight: '300px' }}>
+              <div
+                className="feature feature-1 boxed"
+                style={{ minHeight: '300px' }}
+              >
                 <div className="text-center mt48">
                   <h4 className="mb32">Start an Order</h4>
                   <form
@@ -77,9 +83,12 @@ const Dashboard = () => (
             <div className="col-sm-12">
               <div className="feature feature-1 boxed">
                 <div className="text-left left">
-                  <button className="btn btn-lg btn-filled right">In Transit</button>
+                  <button className="btn btn-lg btn-filled right">
+                    In Transit
+                  </button>
                   <h4>
-                    <b>Order #:</b> NEV12345678 |<b>Orig Tracking #:</b> ZXY234JAK52V
+                    <b>Order #:</b> NEV12345678 |<b>Orig Tracking #:</b>{' '}
+                    ZXY234JAK52V
                   </h4>
                   <ul className="list-inline">
                     <li>
@@ -114,9 +123,12 @@ const Dashboard = () => (
             <div className="col-sm-12">
               <div className="feature feature-1 boxed">
                 <div className="text-left left">
-                  <button className="btn btn-lg btn-filled right">Waiting For Sipment</button>
+                  <button className="btn btn-lg btn-filled right">
+                    Waiting For Sipment
+                  </button>
                   <h4>
-                    <b>Order #:</b> NEV12345678 |<b>Orig Tracking #:</b> ZXY234JAK52V
+                    <b>Order #:</b> NEV12345678 |<b>Orig Tracking #:</b>{' '}
+                    ZXY234JAK52V
                   </h4>
                   <ul className="list-inline">
                     <li>
@@ -146,9 +158,12 @@ const Dashboard = () => (
             <div className="col-sm-12">
               <div className="feature feature-1 boxed">
                 <div className="text-left left">
-                  <button className="btn btn-lg btn-filled right">Picked Up</button>
+                  <button className="btn btn-lg btn-filled right">
+                    Picked Up
+                  </button>
                   <h4>
-                    <b>Order #:</b> NEV12348295 |<b>Orig Tracking #:</b> ZXY234JAK52V
+                    <b>Order #:</b> NEV12348295 |<b>Orig Tracking #:</b>{' '}
+                    ZXY234JAK52V
                   </h4>
                   <ul className="list-inline">
                     <li>
@@ -181,6 +196,6 @@ const Dashboard = () => (
       <FooterContainer />
     </div>
   </Fragment>
-);
+)
 
-export default Dashboard;
+export default Dashboard

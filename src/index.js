@@ -6,25 +6,25 @@
   eslint has no way to tell that and outputs an error
 */
 // react dependencies
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 // hot reload for development
-import { AppContainer } from 'react-hot-loader';
+import { AppContainer } from 'react-hot-loader'
 // redux dependencies
-import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/lib/integration/react';
-import { ToastContainer } from 'react-toastify';
-import configureStore from './config/initializers/store';
+import { Provider } from 'react-redux'
+import { PersistGate } from 'redux-persist/lib/integration/react'
+import { ToastContainer } from 'react-toastify'
+import configureStore from './config/initializers/store'
 
-import App from './App';
+import App from './App'
 
-import './style.scss';
+import './style.scss'
 
-const root = document.getElementById('root');
+const root = document.getElementById('root')
 
-export const { store, persistor } = configureStore();
+export const { store, persistor } = configureStore()
 
-const render = (Component) => {
+const render = Component => {
   ReactDOM.render(
     <AppContainer>
       <Provider store={store}>
@@ -34,14 +34,14 @@ const render = (Component) => {
         </PersistGate>
       </Provider>
     </AppContainer>,
-    root,
-  );
-};
+    root
+  )
+}
 
-render(App);
+render(App)
 
 if (module.hot) {
   module.hot.accept('./App', () => {
-    render(App);
-  });
+    render(App)
+  })
 }
