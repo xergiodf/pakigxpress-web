@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import { NavLink } from 'react-router-dom'
 import NavContainer from '../NavContainer'
 import FooterContainer from '../FooterContainer'
 import PageTitle from '../../components/PageTitle'
@@ -37,7 +38,7 @@ const Login = () => (
             <div className="col-md-12 text-center">
               <p>
                 <i>
-                  Dont Have an account? <a href="sign-up.html">Sign Up</a>
+                  Dont Have an account? <NavLink to="/signup">Sign Up</NavLink>
                 </i>
               </p>
             </div>

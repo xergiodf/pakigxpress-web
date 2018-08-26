@@ -34,7 +34,7 @@ const NavContainer = props => (
           <div className="module widget-handle language left">
             <ul className="menu">
               <li>
-                <a href="log-in.html">My Account</a>
+                <NavLink to="/login">My account</NavLink>
               </li>
             </ul>
           </div>

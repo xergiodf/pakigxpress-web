@@ -1,58 +1,178 @@
-import React, { Fragment } from 'react'
+import React, { Component, Fragment } from 'react'
+import PropTypes from 'prop-types'
+import { reduxForm, Field } from 'redux-form'
+import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
+
+import signupRequest from '../../actions/signup'
+
 import NavContainer from '../NavContainer'
 import FooterContainer from '../FooterContainer'
-import PageTitle from '../../components/PageTitle'
 
-const Signup = () => (
-  <Fragment>
-    <NavContainer transparent />
-    <div className="main-container">
-      <PageTitle title="Sign Up" />
-      <section>
-        <div className="container">
-          <div className="col-md-6 col-md-push-3">
-            <form className="form-email">
-              <h6 className="uppercase text-center">Sign Up</h6>
-              <input
-                type="text"
-                className="validate-required"
-                name="name"
-                placeholder="Email"
-              />
-              <input
-                type="text"
-                className="validate-required validate-email"
-                name="email"
-                placeholder="Password"
-              />
-              <input
-                type="text"
-                className="validate-required validate-email"
-                name="email"
-                placeholder="Confirm Password"
-              />
-              <a
-                style={{ width: '100%' }}
-                className="btn btn-lg btn-filled"
-                href="sign-up2.html"
-              >
-                {' '}
-                Sign Up
-              </a>
-            </form>
-            <div className="col-md-12 text-center">
-              <p>
-                <i>
-                  Already have an account? <a href="log-in.html">Log in</a>
-                </i>
-              </p>
+import { PageTitle, Messages, Errors } from '../../components/'
+
+class Signup extends Component {
+  static propTypes = {
+    handleSubmit: PropTypes.func,
+    signupRequest: PropTypes.func,
+    signup: PropTypes.shape({
+      requesting: PropTypes.bool,
+      successful: PropTypes.bool,
+      messages: PropTypes.array,
+      errors: PropTypes.array,
+    }),
+  }
+
+  /**
+   * Handles form submission with values
+   */
+  submit = values => {
+    this.props.signupRequest(values)
+  }
+
+  render() {
+    const {
+      handleSubmit,
+      signup: { requesting, successful },
+    } = this.props
+
+    return (
+      <Fragment>
+        <NavContainer transparent />
+        <div className="main-container">
+          <PageTitle title="Sign Up" />
+          <section>
+            <div className="container">
+              <div className="col-md-6 col-md-push-3">
+                <form
+                  className="form-email"
+                  onSubmit={handleSubmit(this.submit)}
+                >
+                  <h6 className="uppercase text-center">Sign Up</h6>
+                  <Field
+                    id="email"
+                    placeholder="Email"
+                    name="email"
+                    type="text"
+                    className="validate-required validate-email"
+                    component="input"
+                  />
+                  <Field
+                    id="password"
+                    placeholder="Password"
+                    name="password"
+                    type="password"
+                    className="validate-required"
+                    component="input"
+                  />
+                  <Field
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    type="password"
+                    className="validate-required"
+                    component="input"
+                  />
+                  <hr />
+                  <Field
+                    id="fullName"
+                    placeholder="Full Name"
+                    name="name"
+                    type="text"
+                    className="validate-required"
+                    component="input"
+                  />
+                  <Field
+                    id="phoneNumber"
+                    name="phoneNumber"
+                    placeholder="Phone Number"
+                    type="text"
+                    className="validate-required"
+                    component="input"
+                  />
+                  <Field
+                    id="addressLine1"
+                    name="addressLine1"
+                    placeholder="Address Line 1"
+                    type="text"
+                    className="validate-required"
+                    component="input"
+                  />
+                  <Field
+                    id="addressLine2"
+                    name="addressLine2"
+                    placeholder="Address Line 2"
+                    type="text"
+                    className="validate-required"
+                    component="input"
+                  />
+                  <Field
+                    id="city"
+                    name="city"
+                    placeholder="City"
+                    type="text"
+                    className="validate-required"
+                    component="input"
+                  />
+                  <Field
+                    id="state"
+                    name="state"
+                    placeholder="State"
+                    type="text"
+                    className="validate-required"
+                    component="input"
+                  />
+                  <Field
+                    id="zip"
+                    name="zip"
+                    placeholder="Zip Code"
+                    type="text"
+                    className="validate-required"
+                    component="input"
+                  />
+                  <button
+                    style={{ width: '100%' }}
+                    className="btn btn-lg btn-filled"
+                    type="submit"
+                  >
+                    Sign Up
+                  </button>
+                </form>
+                <div className="col-md-12 text-center">
+                  <p>
+                    <i>
+                      Already have an account?{' '}
+                      <NavLink to="/login">Log in</NavLink>
+                    </i>
+                  </p>
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
+          <FooterContainer />
         </div>
-      </section>
-      <FooterContainer />
-    </div>
-  </Fragment>
-)
+      </Fragment>
+    )
+  }
+}
 
-export default Signup
+const mapStateToProps = state => ({
+  signup: state.signupReducer,
+})
+
+const mapDispatchToProps = dispatch => ({
+  signupRequest: payload => dispatch(signupRequest(payload)),
+})
+
+const connected = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Signup)
+
+// Connect our connected component to Redux Form.  It will namespace
+// the form we use in this component as `signup`.
+const formed = reduxForm({
+  form: 'signup',
+})(connected)
+
+export default formed
