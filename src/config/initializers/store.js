@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux'
 import { persistStore } from 'redux-persist'
 import createSagaMiddleware from 'redux-saga'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import ENV from '../constants/env'
 
 import reducers from '../../reducers'
 import sagas from '../../sagas'
@@ -8,13 +10,16 @@ import sagas from '../../sagas'
 /* eslint-disable no-underscore-dangle */
 const configureStore = () => {
   const sagaMiddleware = createSagaMiddleware()
+  const middlewares = [sagaMiddleware]
+  let composeEnhancers = compose
+
+  if (ENV.DEBUG.REDUX) {
+    composeEnhancers = composeWithDevTools
+  }
+
   const store = createStore(
     reducers,
-    compose(
-      applyMiddleware(sagaMiddleware),
-      window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        window.__REDUX_DEVTOOLS_EXTENSION__()
-    )
+    composeEnhancers(applyMiddleware(...middlewares))
   )
   /* eslint-enable */
 
@@ -23,7 +28,7 @@ const configureStore = () => {
 
   return {
     store,
-    persistor,
+    persistor
   }
 }
 

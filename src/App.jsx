@@ -1,12 +1,13 @@
 import React from 'react'
-import { BrowserRouter } from 'react-router-dom'
+import { HashRouter } from 'react-router-dom'
+// import history from './helpers/history'
 
 import Routes from './Routes'
 
 const App = () => (
-  <BrowserRouter>
+  <HashRouter>
     <Routes />
-  </BrowserRouter>
+  </HashRouter>
 )
 
 export default App

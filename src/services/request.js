@@ -9,7 +9,7 @@ import { REQUEST_START, REQUEST_END, ALERT_ERROR } from '../actions/actionTypes'
 
 const { BASE_URL, REQUEST_DELAY } = ENV.API
 
-export default function*(options = {}, extraOptions = {}) {
+export default function * (options = {}, extraOptions = {}) {
   yield put({ type: REQUEST_START, payload: extraOptions.requestType })
 
   // const { me } = store.getState()
@@ -18,13 +18,13 @@ export default function*(options = {}, extraOptions = {}) {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      ...headers,
+      ...headers
     },
     method: options.method || 'GET',
     params: options.params,
     baseURL: options.baseURL || BASE_URL,
     url: options.url,
-    data: options.data,
+    data: options.data
   }
 
   // Authorization Token
@@ -43,8 +43,8 @@ export default function*(options = {}, extraOptions = {}) {
             code: error.response.status,
             description: error.response.data.message
               ? error.response.data.message
-              : error.response.data,
-          },
+              : error.response.data
+          }
         }
       }
 
@@ -52,9 +52,8 @@ export default function*(options = {}, extraOptions = {}) {
         error: {
           title: 'API ERROR',
           code: 503,
-          description:
-            'It was not possible to connect with the server. Try again in a moment.',
-        },
+          description: 'It was not possible to connect with the server. Try again in a moment.'
+        }
       }
     })
 
@@ -64,7 +63,8 @@ export default function*(options = {}, extraOptions = {}) {
   if (response.error) {
     const payload = { ...response.error }
     yield put({ type: ALERT_ERROR, payload })
+    return response
   }
 
-  return response
+  return response.response
 }

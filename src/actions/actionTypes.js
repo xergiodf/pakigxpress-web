@@ -19,3 +19,10 @@ export const USER_UNSET = 'USER_UNSET'
 export const SIGNUP_REQUEST = 'SIGNUP_REQUEST'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 export const SIGNUP_ERROR = 'SIGNUP_ERROR'
+
+/**
+ * Login Actions
+ */
+export const AUTH_REQUEST = 'AUTH_REQUEST'
+export const AUTH_SUCCESS = 'AUTH_SUCCESS'
+export const AUTH_ERROR = 'AUTH_ERROR'

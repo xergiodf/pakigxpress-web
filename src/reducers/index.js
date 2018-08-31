@@ -4,17 +4,21 @@ import storage from 'redux-persist/lib/storage'
 
 import userReducer from './user'
 import signupReducer from './signup'
+import loginReducer from './login'
+import meReducer from './me'
 
 const config = {
   key: 'root',
   storage,
-  whitelist: ['form'],
+  whitelist: ['meReducer']
 }
 
 const reducers = persistCombineReducers(config, {
   form,
   userReducer,
   signupReducer,
+  loginReducer,
+  meReducer
 })
 
 export default reducers

@@ -16,6 +16,19 @@ const signup = payload =>
     }
   )
 
-const login = () => ({})
+const login = payload =>
+  request(
+    {
+      url: 'user/auth',
+      method: 'POST',
+      data: {
+        email: payload.email,
+        password: payload.password,
+      },
+    },
+    {
+      requestType: 'login',
+    }
+  )
 
 export { signup, login }

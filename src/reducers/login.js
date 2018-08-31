@@ -1,29 +1,25 @@
-import {
-  SIGNUP_REQUEST,
-  SIGNUP_SUCCESS,
-  SIGNUP_ERROR,
-} from '../actions/actionTypes'
+import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR } from '../actions/actionTypes'
 
 const initialState = {
   requesting: false,
-  successful: false,
+  successful: false
 }
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case SIGNUP_REQUEST:
+    case AUTH_REQUEST:
       return {
         requesting: true,
-        successful: false,
+        successful: false
       }
 
-    case SIGNUP_SUCCESS:
+    case AUTH_SUCCESS:
       return {
         requesting: false,
-        successful: true,
+        successful: true
       }
 
-    case SIGNUP_ERROR:
+    case AUTH_ERROR:
       return initialState
 
     default:
