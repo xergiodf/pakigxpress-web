@@ -1,7 +1,7 @@
 import { delay } from 'redux-saga'
 import { put } from 'redux-saga/effects'
 
-// import { store } from '../index'
+import { store } from '../index'
 import ENV from '../config/constants/env'
 
 import axios from '../config/initializers/axios'
@@ -12,7 +12,7 @@ const { BASE_URL, REQUEST_DELAY } = ENV.API
 export default function * (options = {}, extraOptions = {}) {
   yield put({ type: REQUEST_START, payload: extraOptions.requestType })
 
-  // const { me } = store.getState()
+  const { meReducer } = store.getState()
   const headers = options.headers || {}
   const requestOptions = {
     headers: {
@@ -28,9 +28,9 @@ export default function * (options = {}, extraOptions = {}) {
   }
 
   // Authorization Token
-  // if (me.data) {
-  //   requestOptions.headers.Authorization = `Bearer ${me.data.token}`
-  // }
+  if (meReducer.data) {
+    requestOptions.headers.Authorization = `Bearer ${meReducer.data.token}`
+  }
 
   const response = yield axios
     .request(requestOptions)

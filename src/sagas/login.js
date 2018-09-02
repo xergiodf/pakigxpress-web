@@ -25,15 +25,12 @@ const loginFlow = function * loginFlow (action) {
       yield put({
         type: ALERT_SUCCESS,
         payload: {
-          description: `Welcome ${response.fullName}!`
+          description: `Welcome ${response.full_name}!`
         }
       })
 
       // Redux
       yield put({ type: AUTH_SUCCESS, payload: { auth: true, ...response } })
-
-      // Local
-      localStorage.setItem('token', JSON.stringify(response.token))
     }
   } catch (e) {
     yield put({

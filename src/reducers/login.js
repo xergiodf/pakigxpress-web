@@ -1,4 +1,4 @@
-import { AUTH_REQUEST, AUTH_SUCCESS, AUTH_ERROR } from '../actions/actionTypes'
+import { AUTH_REQUEST, AUTH_ERROR } from '../actions/actionTypes'
 
 const initialState = {
   requesting: false,
@@ -11,12 +11,6 @@ const reducer = (state = initialState, action) => {
       return {
         requesting: true,
         successful: false
-      }
-
-    case AUTH_SUCCESS:
-      return {
-        requesting: false,
-        successful: true
       }
 
     case AUTH_ERROR:

@@ -4,22 +4,22 @@ import {
   SIGNUP_SUCCESS,
   SIGNUP_ERROR,
   ALERT_ERROR,
-  ALERT_SUCCESS,
+  ALERT_SUCCESS
 } from '../actions/actionTypes'
 import { signup } from '../services/usersApi'
 
-const signupFlow = function* signupFlow(action) {
+const signupFlow = function * signupFlow (action) {
   try {
     const response = yield call(signup, action.payload)
 
     if (response.error) {
-      yield put({ type: SIGNUP_ERROR, response })
+      yield put({ type: SIGNUP_ERROR, payload: response })
     } else {
       yield put({
         type: ALERT_SUCCESS,
         payload: {
-          description: `Welcome ${response.fullName}!`,
-        },
+          description: `Successfully registered. ${response.full_name} you can login now!`
+        }
       })
       yield put({ type: SIGNUP_SUCCESS, response })
     }
@@ -29,13 +29,13 @@ const signupFlow = function* signupFlow(action) {
       payload: {
         title: '',
         code: 0,
-        description: e.message,
-      },
+        description: e.message
+      }
     })
   }
 }
 
-const signupWatcher = function* signupWatcher() {
+const signupWatcher = function * signupWatcher () {
   yield takeLatest(SIGNUP_REQUEST, signupFlow)
 }
 

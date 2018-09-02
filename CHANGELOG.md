@@ -14,6 +14,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.1.4] - 2018-09-01
+
+- Redux / Saga / Actions / Reducers for Orders
+- Added Orders API Service
+
 ## [0.1.3] - 2018-08-25
 
 - Redux / Saga

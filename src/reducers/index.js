@@ -6,6 +6,7 @@ import userReducer from './user'
 import signupReducer from './signup'
 import loginReducer from './login'
 import meReducer from './me'
+import orderReducer from './order'
 
 const config = {
   key: 'root',
@@ -18,7 +19,8 @@ const reducers = persistCombineReducers(config, {
   userReducer,
   signupReducer,
   loginReducer,
-  meReducer
+  meReducer,
+  orderReducer
 })
 
 export default reducers
