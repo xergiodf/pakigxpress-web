@@ -1,6 +1,6 @@
 module.exports = {
   "API": {
-    "BASE_URL": "https://agile-harbor-83070.herokuapp.com/api",
+    "BASE_URL": "http://104.248.63.163/api",
     "REQUEST_TIMEOUT": 15000,
     "REQUEST_DELAY": 500
   },

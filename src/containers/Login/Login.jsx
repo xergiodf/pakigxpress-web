@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom'
 
-import loginRequest from '../../actions/login'
+import { loginRequest } from '../../actions/session'
 
 import NavContainer from '../NavContainer'
 import FooterContainer from '../FooterContainer'

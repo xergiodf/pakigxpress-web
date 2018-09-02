@@ -2,7 +2,7 @@ module.exports = {
   meta: {},
   data: {
     API: {
-      BASE_URL: 'https://api.pakixpress.com/api',
+      BASE_URL: 'http://104.248.63.163/api',
       REQUEST_TIMEOUT: 15000,
       REQUEST_DELAY: 500
     },

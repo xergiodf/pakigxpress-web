@@ -1,24 +1,36 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, NavLink } from 'react-router-dom'
 import NavContainer from '../NavContainer'
 import FooterContainer from '../FooterContainer'
+import OrderCard from './OrderCard'
+import { authUserOrdersRequest } from '../../actions/order'
 
 class Dashboard extends Component {
   static propTypes = {
     me: PropTypes.shape({
       data: PropTypes.shape({})
-    })
+    }),
+    orders: PropTypes.shape({}),
+    authUserOrdersRequest: PropTypes.func
+  }
+
+  componentDidMount () {
+    if (this.props.me.data.auth) {
+      this.props.authUserOrdersRequest({})
+    }
   }
 
   render () {
+    const { client, email } = this.props.me.data
+    const { data } = this.props.orders
     return (
       <Fragment>
         <Fragment>
           {!this.props.me.data.auth && <Redirect to='/login' />}
         </Fragment>
-        <NavContainer />
+        <NavContainer me={this.props.me} />
         <div className='main-container'>
           <section className='page-title pb16 pt64'>
             <div className='container'>
@@ -39,11 +51,12 @@ class Dashboard extends Component {
                       <h4 className='mb0'>Account Info</h4>
                       <a href='/'>Edit Info</a>
                       <ul className='mt32'>
-                        <li>{this.props.me.data.fullName}</li>
-                        <li>{this.props.me.data.email}</li>
-                        <li>305.305.3050</li>
-                        <li>123 Main St</li>
-                        <li>Miami Beach FL 33141</li>
+                        <li>{client.full_name}</li>
+                        <li>{email}</li>
+                        <li>{client.phone}</li>
+                        <li>{client.address_1}</li>
+                        <li>{client.address_2}</li>
+                        <li>{client.city} {client.state} {client.zip}</li>
                       </ul>
                     </div>
                   </div>
@@ -60,13 +73,13 @@ class Dashboard extends Component {
                         data-success='Thanks for your submission, we will be in touch shortly.'
                         data-error='Please fill all fields correctly.'
                       >
-                        <a
+                        <NavLink
+                          to='/calculate'
                           style={{ width: '100%' }}
                           className='btn btn-lg btn-filled'
-                          href='calculate.html'
                         >
                           Calculate An Order
-                        </a>
+                        </NavLink>
                       </form>
                     </div>
                   </div>
@@ -83,139 +96,18 @@ class Dashboard extends Component {
                         data-success='Thanks for your submission, we will be in touch shortly.'
                         data-error='Please fill all fields correctly.'
                       >
-                        <a
+                        <NavLink
+                          to='/new'
                           style={{ width: '100%' }}
                           className='btn btn-lg btn-filled'
-                          href='new-order.html'
                         >
                           Start A New Order
-                        </a>
+                        </NavLink>
                       </form>
                     </div>
                   </div>
                 </div>
-                <div className='col-sm-12'>
-                  <div className='feature feature-1 boxed'>
-                    <div className='text-left left'>
-                      <button className='btn btn-lg btn-filled right'>
-                        In Transit
-                      </button>
-                      <h4>
-                        <b>Order #:</b>
-                        {' '}
-                        NEV12345678 |
-                        <b>Orig Tracking #:</b>
-                        {' '}
-                        ZXY234JAK52V
-                      </h4>
-                      <ul className='list-inline'>
-                        <li>
-                          <h5>
-                            <b>Destination:</b> Nevis
-                          </h5>
-                        </li>
-                        <li>
-                          <h5>
-                            <b>Est Arrival:</b> 12/21/2018
-                          </h5>
-                        </li>
-                        <li>
-                          <h5>
-                            <b>Pickup Location:</b> 123 Main St Nevis
-                          </h5>
-                        </li>
-                        <li>
-                          <h5>
-                            <b>Orig Tracking #:</b> ZXY234JAK52V
-                          </h5>
-                        </li>
-                        <li>
-                          <h5>
-                            <b>Payment:</b> Pending
-                          </h5>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className='col-sm-12'>
-                  <div className='feature feature-1 boxed'>
-                    <div className='text-left left'>
-                      <button className='btn btn-lg btn-filled right'>
-                        Waiting For Sipment
-                      </button>
-                      <h4>
-                        <b>Order #:</b>
-                        {' '}
-                        NEV12345678 |
-                        <b>Orig Tracking #:</b>
-                        {' '}
-                        ZXY234JAK52V
-                      </h4>
-                      <ul className='list-inline'>
-                        <li>
-                          <h5>
-                            <b>Destination:</b> Nevis
-                          </h5>
-                        </li>
-                        <li>
-                          <h5>
-                            <b>Est Arrival:</b> 12/21/2018
-                          </h5>
-                        </li>
-                        <li>
-                          <h5>
-                            <b>Pickup Location:</b> 123 Main St Nevis
-                          </h5>
-                        </li>
-                        <li>
-                          <h5>
-                            <b>Payment:</b> Pending
-                          </h5>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className='col-sm-12'>
-                  <div className='feature feature-1 boxed'>
-                    <div className='text-left left'>
-                      <button className='btn btn-lg btn-filled right'>
-                        Picked Up
-                      </button>
-                      <h4>
-                        <b>Order #:</b>
-                        {' '}
-                        NEV12348295 |
-                        <b>Orig Tracking #:</b>
-                        {' '}
-                        ZXY234JAK52V
-                      </h4>
-                      <ul className='list-inline'>
-                        <li>
-                          <h5>
-                            <b>Destination:</b> Nevis
-                          </h5>
-                        </li>
-                        <li>
-                          <h5>
-                            <b>Pickup Location:</b> 123 Main St Nevis
-                          </h5>
-                        </li>
-                        <li>
-                          <h5>
-                            <b>Orig Tracking #:</b> ZXY2323234552V
-                          </h5>
-                        </li>
-                        <li>
-                          <h5>
-                            <b>Payment:</b> Paid
-                          </h5>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
+                {data && data.map(o => <OrderCard key={o.id} {...o} />)}
               </div>
             </div>
           </section>
@@ -227,9 +119,12 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => ({
-  me: state.meReducer
+  me: state.meReducer,
+  orders: state.orderReducer
 })
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => ({
+  authUserOrdersRequest: payload => dispatch(authUserOrdersRequest(payload))
+})
 
-export default connect(mapStateToProps, null)(Dashboard)
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)
