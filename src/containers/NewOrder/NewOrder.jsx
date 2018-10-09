@@ -76,7 +76,7 @@ class NewOrder extends Component {
                     id='est_date_arriv'
                     placeholder='Estimated Arrival Form Origin Shipper'
                     name='est_date_arriv'
-                    type='text'
+                    type='date'
                     className='validate-required validate-email'
                     component='input'
                   />

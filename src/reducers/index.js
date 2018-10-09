@@ -7,6 +7,7 @@ import signupReducer from './signup'
 import loginReducer from './login'
 import meReducer from './me'
 import orderReducer from './order'
+import requestReducer from './request'
 
 const config = {
   key: 'root',
@@ -20,7 +21,8 @@ const reducers = persistCombineReducers(config, {
   signupReducer,
   loginReducer,
   meReducer,
-  orderReducer
+  orderReducer,
+  requestReducer
 })
 
 export default reducers

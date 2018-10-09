@@ -1,13 +1,24 @@
-import React from 'react'
+import React, { PureComponent, Fragment } from 'react'
 import { HashRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 // import history from './helpers/history'
 
 import Routes from './Routes'
+import Loader from './components/Loader/'
 
-const App = () => (
-  <HashRouter>
-    <Routes />
-  </HashRouter>
-)
+class App extends PureComponent {
+  render () {
+    return (
+      <Fragment>
+        {this.props.requestReducer.requesting && <Loader />}
+        <HashRouter>
+          <Routes />
+        </HashRouter>
+      </Fragment>
+    )
+  }
+}
 
-export default App
+const mapStateToProps = ({ requestReducer }) => ({ requestReducer })
+
+export default connect(mapStateToProps)(App)

@@ -78,24 +78,24 @@ class Signup extends Component {
                     component='input'
                   />
                   <Field
-                    id='phoneNumber'
-                    name='phoneNumber'
+                    id='phone'
+                    name='phone'
                     placeholder='Phone Number'
                     type='text'
                     className='validate-required'
                     component='input'
                   />
                   <Field
-                    id='addressLine1'
-                    name='addressLine1'
+                    id='address_1'
+                    name='address_1'
                     placeholder='Address Line 1'
                     type='text'
                     className='validate-required'
                     component='input'
                   />
                   <Field
-                    id='addressLine2'
-                    name='addressLine2'
+                    id='address_2'
+                    name='address_2'
                     placeholder='Address Line 2'
                     type='text'
                     className='validate-required'

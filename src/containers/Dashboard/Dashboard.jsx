@@ -5,7 +5,12 @@ import { Redirect, NavLink } from 'react-router-dom'
 import NavContainer from '../NavContainer'
 import FooterContainer from '../FooterContainer'
 import OrderCard from './OrderCard'
-import { authUserOrdersRequest } from '../../actions/order'
+import ClientForm from './ClientForm'
+import Modal from '../../components/Modal/Modal'
+import {
+  authUserOrdersRequest,
+  authAdminOrdersRequest
+} from '../../actions/order'
 
 class Dashboard extends Component {
   static propTypes = {
@@ -13,13 +18,27 @@ class Dashboard extends Component {
       data: PropTypes.shape({})
     }),
     orders: PropTypes.shape({}),
-    authUserOrdersRequest: PropTypes.func
+    authUserOrdersRequest: PropTypes.func,
+    authAdminOrdersRequest: PropTypes.func
+  }
+
+  state = {
+    showModal: false
   }
 
   componentDidMount () {
-    if (this.props.me.data.auth) {
-      this.props.authUserOrdersRequest({})
+    const { data } = this.props.me
+    if (data.auth) {
+      if (data.role === 'admin') {
+        this.props.authAdminOrdersRequest({})
+      } else {
+        this.props.authUserOrdersRequest({})
+      }
     }
+  }
+
+  handleClose = () => {
+    this.setState({ showModal: !this.state.showModal })
   }
 
   render () {
@@ -49,14 +68,16 @@ class Dashboard extends Component {
                   <div className='feature feature-1 boxed'>
                     <div className='text-left'>
                       <h4 className='mb0'>Account Info</h4>
-                      <a href='/'>Edit Info</a>
+                      <button onClick={this.handleClose}>Edit Info</button>
                       <ul className='mt32'>
                         <li>{client.full_name}</li>
                         <li>{email}</li>
                         <li>{client.phone}</li>
                         <li>{client.address_1}</li>
                         <li>{client.address_2}</li>
-                        <li>{client.city} {client.state} {client.zip}</li>
+                        <li>
+                          {client.city} {client.state} {client.zip}
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -107,12 +128,20 @@ class Dashboard extends Component {
                     </div>
                   </div>
                 </div>
-                {data && data.map(o => <OrderCard key={o.id} {...o} />)}
+                {data && data.map(o => <OrderCard key={o.id} data={o} />)}
               </div>
             </div>
           </section>
           <FooterContainer />
         </div>
+        <Modal
+          size='large'
+          visible={this.state.showModal}
+          onRequestToClose={this.handleClose}
+          closeKeys={['esc']}
+        >
+          <ClientForm id={client.id} />
+        </Modal>
       </Fragment>
     )
   }
@@ -124,7 +153,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  authUserOrdersRequest: payload => dispatch(authUserOrdersRequest(payload))
+  authUserOrdersRequest: payload => dispatch(authUserOrdersRequest(payload)),
+  authAdminOrdersRequest: payload => dispatch(authAdminOrdersRequest(payload))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard)

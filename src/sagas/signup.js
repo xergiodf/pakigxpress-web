@@ -18,7 +18,7 @@ const signupFlow = function * signupFlow (action) {
       yield put({
         type: ALERT_SUCCESS,
         payload: {
-          description: `Successfully registered. ${response.full_name} you can login now!`
+          description: `Successfully registered. ${response.fullName} you can login now!`
         }
       })
       yield put({ type: SIGNUP_SUCCESS, response })
