@@ -1,4 +1,8 @@
-import { AUTH_SUCCESS, LOGOUT_REQUEST } from '../actions/actionTypes'
+import {
+  AUTH_SUCCESS,
+  LOGOUT_REQUEST,
+  CLIENT_EDIT_SUCCESS,
+} from '../actions/actionTypes'
 
 const initialState = {
   data: {
@@ -12,9 +16,9 @@ const initialState = {
       address_2: '',
       city: '',
       state: '',
-      zip: ''
-    }
-  }
+      zip: '',
+    },
+  },
 }
 
 const reducer = (state = initialState, action) => {
@@ -22,7 +26,16 @@ const reducer = (state = initialState, action) => {
     case AUTH_SUCCESS:
       return {
         ...state,
-        data: action.payload
+        data: action.payload,
+      }
+
+    case CLIENT_EDIT_SUCCESS:
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          client: action.payload,
+        },
       }
 
     case LOGOUT_REQUEST:

@@ -1,18 +1,18 @@
 import { fork, all } from 'redux-saga/effects'
 
-import watchAlert from './alert'
-import watchSignup from './signup'
-import watchLogin from './login'
-import watchOrder from './order'
-import watchClient from './client'
+import alertSaga from './alert'
+import clientSaga from './client'
+import loginSaga from './login'
+import orderSaga from './order'
+import signupSaga from './signup'
 
-const watchSagas = function * watchSagas () {
+const watchSagas = function* watchSagas() {
   yield all([
-    fork(watchAlert),
-    fork(watchSignup),
-    fork(watchLogin),
-    fork(watchOrder),
-    fork(watchClient)
+    fork(alertSaga),
+    fork(clientSaga),
+    fork(loginSaga),
+    fork(orderSaga),
+    fork(signupSaga),
   ])
 }
 
