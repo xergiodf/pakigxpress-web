@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 import { HotKeys } from 'react-hotkeys'
 import styled from 'styled-components'
@@ -51,7 +50,7 @@ class Modal extends React.Component {
     onRequestToClose: PropTypes.func,
     cancellable: PropTypes.bool,
     showBackdrop: PropTypes.bool,
-    backdropBackground: PropTypes.string
+    backdropBackground: PropTypes.string,
   }
 
   static defaultProps = {
@@ -62,18 +61,18 @@ class Modal extends React.Component {
     onRequestToClose: null,
     cancellable: true,
     showBackdrop: true,
-    backdropBackground: 'rgba(0, 0, 0, 0.5)'
+    backdropBackground: 'rgba(0, 0, 0, 0.5)',
   }
 
-  get keysActions () {
+  get keysActions() {
     return {
-      requestToClose: this.props.closeKeys
+      requestToClose: this.props.closeKeys,
     }
   }
 
-  get keysHandlers () {
+  get keysHandlers() {
     return {
-      requestToClose: () => this.handleRequestToClose()
+      requestToClose: () => this.handleRequestToClose(),
     }
   }
 
@@ -84,7 +83,7 @@ class Modal extends React.Component {
 
   handleContentPress = e => e.stopPropagation()
 
-  render () {
+  render() {
     const { children } = this.props
     const childrenWithProps = React.Children.map(children, child =>
       React.cloneElement(child, { visible: this.props.visible })

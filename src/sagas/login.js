@@ -4,13 +4,15 @@ import {
   AUTH_SUCCESS,
   AUTH_ERROR,
   USER_UNSET,
+  STATUS_ORDER_REQUEST,
+  STATUS_PAYMENT_REQUEST,
   ALERT_ERROR,
-  ALERT_SUCCESS
+  ALERT_SUCCESS,
 } from '../actions/actionTypes'
 import { setUser, unsetUser } from '../actions/user'
 import { login } from '../services/usersApi'
 
-const loginFlow = function * loginFlow (action) {
+const loginFlow = function* loginFlow(action) {
   let response
   try {
     response = yield call(login, action.payload)
@@ -25,12 +27,14 @@ const loginFlow = function * loginFlow (action) {
       yield put({
         type: ALERT_SUCCESS,
         payload: {
-          description: `Welcome ${response.full_name}!`
-        }
+          description: `Welcome ${response.full_name}!`,
+        },
       })
 
       // Redux
       yield put({ type: AUTH_SUCCESS, payload: { auth: true, ...response } })
+      yield put({ type: STATUS_ORDER_REQUEST })
+      yield put({ type: STATUS_PAYMENT_REQUEST })
     }
   } catch (e) {
     yield put({
@@ -38,8 +42,8 @@ const loginFlow = function * loginFlow (action) {
       payload: {
         title: '',
         code: 0,
-        description: e.message
-      }
+        description: e.message,
+      },
     })
 
     // Send error to redux
@@ -52,12 +56,12 @@ const loginFlow = function * loginFlow (action) {
   return response.token
 }
 
-const logout = function * logout () {
+const logout = function* logout() {
   yield put(unsetUser())
   localStorage.removeItem('token')
 }
 
-const loginWatcher = function * loginWatcher () {
+const loginWatcher = function* loginWatcher() {
   while (true) {
     const payload = yield take(AUTH_REQUEST)
     const task = yield fork(loginFlow, payload)

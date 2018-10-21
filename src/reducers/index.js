@@ -8,12 +8,13 @@ import meReducer from './me'
 import orderReducer from './order'
 import requestReducer from './request'
 import signupReducer from './signup'
+import statusReducer from './statuses'
 import userReducer from './user'
 
 const config = {
   key: 'root',
   storage,
-  whitelist: ['meReducer'],
+  whitelist: ['meReducer', 'statusReducer'],
 }
 
 const reducers = persistCombineReducers(config, {
@@ -24,6 +25,7 @@ const reducers = persistCombineReducers(config, {
   orderReducer,
   requestReducer,
   signupReducer,
+  statusReducer,
   userReducer,
 })
 

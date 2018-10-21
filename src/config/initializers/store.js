@@ -24,11 +24,11 @@ const configureStore = () => {
   /* eslint-enable */
 
   sagaMiddleware.run(sagas)
-  const persistor = persistStore(store, null)
+  const persistor = persistStore(store)
 
   return {
     store,
-    persistor
+    persistor,
   }
 }
 

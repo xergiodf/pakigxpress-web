@@ -5,11 +5,11 @@ import {
   ADMIN_ORDERS_ERROR,
   ADMIN_ORDERS_REQUEST_SUCCESS,
   USER_ORDER_UPDATE_SUCCESS,
-  ADMIN_ORDER_UPDATE_SUCCESS
+  ADMIN_ORDER_UPDATE_SUCCESS,
 } from '../actions/actionTypes'
 
 const initialState = {
-  data: null
+  data: [],
 }
 
 export default (state = initialState, action) => {
