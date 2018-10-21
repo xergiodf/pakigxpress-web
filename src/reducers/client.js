@@ -6,7 +6,7 @@ import {
 } from '../actions/actionTypes'
 
 const initialState = {
-  data: null,
+  data: [],
 }
 
 export default (state = initialState, action) => {

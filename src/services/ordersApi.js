@@ -27,10 +27,17 @@ const updateOrderByAdmin = payload =>
     { requestType: 'updateOrderByAdmin' }
   )
 
+const getOrderSummary = () =>
+  request(
+    { url: `orders/summary`, method: 'GET' },
+    { requestType: 'getOrderSummary' }
+  )
+
 export {
   getOrdersByUser,
   postOrderByUser,
   getOrdersByAdmin,
   updateOrderByUser,
-  updateOrderByAdmin
+  updateOrderByAdmin,
+  getOrderSummary
 }
