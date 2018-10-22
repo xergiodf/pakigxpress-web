@@ -25,12 +25,6 @@ const NavContainer = props => (
               <li>
                 <NavLink to='/'>Home</NavLink>
               </li>
-              <li>
-                <NavLink to='/calculate'>Calculate Package</NavLink>
-              </li>
-              <li>
-                <NavLink to='/new'>New Order</NavLink>
-              </li>
             </ul>
           </div>
           <div className='module widget-handle language left'>

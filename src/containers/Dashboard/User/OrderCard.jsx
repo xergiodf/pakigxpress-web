@@ -37,11 +37,10 @@ class OrderCard extends React.PureComponent {
                 className="btn btn-lg btn-filled right"
                 onClick={() => this.handleOrderSelection()}
               >
-                {
+                {statuses.orders.length > 0 &&
                   statuses.orders.filter(
                     s => s.key === this.props.data.status
-                  )[0].labelUser
-                }
+                  )[0].labelUser}
               </button>
               <h4>
                 <b>Order #:</b>{' '}
@@ -69,11 +68,10 @@ class OrderCard extends React.PureComponent {
                 <li>
                   <h5>
                     <b>Payment:</b>{' '}
-                    {
+                    {statuses.payments.length > 0 &&
                       statuses.payments.filter(
                         s => s.key === this.props.data.pay_status
-                      )[0].labelUser
-                    }
+                      )[0].labelUser}
                   </h5>
                 </li>
               </ul>

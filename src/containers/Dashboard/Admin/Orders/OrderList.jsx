@@ -149,21 +149,19 @@ class OrderList extends PureComponent {
                         </a>
                       </td>
                       <td>
-                        {
+                        {statuses.orders.length > 0 &&
                           statuses.orders.filter(s => s.key === o.status)[0]
-                            .labelAdmin
-                        }
+                            .labelAdmin}
                       </td>
                       <td>{o.destination}</td>
                       <td>{o.client.id}</td>
                       <td>{o.client.full_name}</td>
                       <td>{format(o.est_date_arriv)}</td>
                       <td>
-                        {
+                        {statuses.payments.length > 0 &&
                           statuses.payments.filter(
                             s => s.key === o.pay_status
-                          )[0].labelAdmin
-                        }
+                          )[0].labelAdmin}
                       </td>
                       <td />
                     </tr>

@@ -154,7 +154,7 @@ const updateAdminOrder = function* updateAdminOrder(action) {
         },
       })
       yield put({ type: ADMIN_ORDER_UPDATE_SUCCESS, response })
-      // yield window.location.reload()
+      yield window.location.reload()
     }
   } catch (e) {
     yield put({

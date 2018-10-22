@@ -114,13 +114,13 @@ class Dashboard extends PureComponent {
                         data-success="Thanks for your submission, we will be in touch shortly."
                         data-error="Please fill all fields correctly."
                       >
-                        <NavLink
-                          to="/calculate"
+                        <a
+                          href="#"
                           style={{ width: '100%' }}
                           className="btn btn-lg btn-filled"
                         >
                           Calculate An Order
-                        </NavLink>
+                        </a>
                       </form>
                     </div>
                   </div>
