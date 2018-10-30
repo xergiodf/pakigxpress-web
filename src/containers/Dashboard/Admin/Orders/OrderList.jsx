@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import format from '../../../../helpers/date'
-import { debounce } from '../../../../helpers/util'
+import { filterArray } from '../../../../helpers/util'
 import Modal from '../../../../components/Modal/Modal'
 import OrderForm from '../../OrderForm'
 
@@ -15,7 +15,29 @@ class OrderList extends PureComponent {
   state = {
     showModal: false,
     orderId: null,
-    orders: this.props.orders.data,
+    orders: this.tableData,
+  }
+
+  get tableData() {
+    const { data } = this.props.orders
+    const { statuses } = this.props
+
+    return data.map(o => ({
+      id: o.id,
+      order_id: o.order_id,
+      status_id: o.status,
+      status:
+        statuses.orders.length > 0 &&
+        statuses.orders.filter(s => s.key === o.status)[0].labelAdmin,
+      destination: o.destination,
+      client_id: o.client.id,
+      full_name: o.client.full_name,
+      date_arrival: format(o.est_date_arriv),
+      pay_status_id: o.pay_status,
+      pay_status:
+        statuses.payments.length > 0 &&
+        statuses.payments.filter(s => s.key === o.pay_status)[0].labelAdmin,
+    }))
   }
 
   /**
@@ -31,19 +53,19 @@ class OrderList extends PureComponent {
    * @returns { Void }
    */
   handleStatusChange = selected => {
-    const { data } = this.props.orders
+    const data = this.tableData
     switch (selected) {
       case 'new':
-        this.setState({ orders: data.filter(o => o.status === 'OS1') })
+        this.setState({ orders: data.filter(o => o.status_id === 'OS1') })
         break
       case 'process':
-        this.setState({ orders: data.filter(o => o.status === 'OS2') })
+        this.setState({ orders: data.filter(o => o.status_id === 'OS2') })
         break
       case 'arrived':
-        this.setState({ orders: data.filter(o => o.status === 'OS3') })
+        this.setState({ orders: data.filter(o => o.status_id === 'OS3') })
         break
       case 'invoiced':
-        this.setState({ orders: data.filter(o => o.pay_status === 'PS1') })
+        this.setState({ orders: data.filter(o => o.pay_status_id === 'PS1') })
         break
       default:
         this.setState({ orders: data })
@@ -54,18 +76,11 @@ class OrderList extends PureComponent {
    * @description Filters the orders based on the search text
    */
   handleSearch = term => {
-    // const { data } = this.props.orders
-    // // this.setState({
-    // //   orders: data.filter(obj =>
-    // //     Object.keys(obj).some(key => obj[key].includes(term))
-    // //   ),
-    // // })
-    // data.forEach(obj => Object.keys(obj).some(key => console.log(key)))
-    // // console.log(orders)
+    const data = this.tableData
+    this.setState({ orders: filterArray(data, term) })
   }
 
   render() {
-    const { statuses } = this.props
     return (
       <Fragment>
         <hr />
@@ -76,7 +91,12 @@ class OrderList extends PureComponent {
           <div className="col-md-10">
             <form>
               <div className="col-md-6">
-                <input className="mb0" type="text" placeholder="Search" />
+                <input
+                  className="mb0"
+                  type="text"
+                  placeholder="Search"
+                  onChange={e => this.handleSearch(e.target.value)}
+                />
               </div>
               <div className="col-md-6">
                 <select>
@@ -148,21 +168,12 @@ class OrderList extends PureComponent {
                           {`[${o.id}] ${o.order_id ? o.order_id : ''}`}
                         </a>
                       </td>
-                      <td>
-                        {statuses.orders.length > 0 &&
-                          statuses.orders.filter(s => s.key === o.status)[0]
-                            .labelAdmin}
-                      </td>
+                      <td>{o.status}</td>
                       <td>{o.destination}</td>
-                      <td>{o.client.id}</td>
-                      <td>{o.client.full_name}</td>
-                      <td>{format(o.est_date_arriv)}</td>
-                      <td>
-                        {statuses.payments.length > 0 &&
-                          statuses.payments.filter(
-                            s => s.key === o.pay_status
-                          )[0].labelAdmin}
-                      </td>
+                      <td>{o.client_id}</td>
+                      <td>{o.full_name}</td>
+                      <td>{o.date_arrival}</td>
+                      <td>{o.pay_status}</td>
                       <td />
                     </tr>
                   ))}
