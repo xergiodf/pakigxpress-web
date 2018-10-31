@@ -96,12 +96,7 @@ class AdminDashboard extends PureComponent {
         )
     }
     if (this.props.clients.data.length > 0)
-      return (
-        <ClientList
-          clients={this.props.clients}
-          statuses={this.props.statuses}
-        />
-      )
+      return <ClientList clients={this.props.clients} />
 
     return ''
   }
