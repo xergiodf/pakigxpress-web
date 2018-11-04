@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 import NavContainer from '../../NavContainer'
 import FooterContainer from '../../FooterContainer'
-import OrderCard from './OrderCard'
+import OrderList from './OrderList'
 import ClientForm from '../ClientForm'
 import Modal from '../../../components/Modal/Modal'
 import OrderForm from '../OrderForm'
@@ -116,13 +116,13 @@ class Dashboard extends PureComponent {
                         data-success="Thanks for your submission, we will be in touch shortly."
                         data-error="Please fill all fields correctly."
                       >
-                        <a
-                          href="#"
+                        <NavLink
+                          to="/calculate"
                           style={{ width: '100%' }}
                           className="btn btn-lg btn-filled"
                         >
-                          Calculate An Order
-                        </a>
+                          Calculate an Order
+                        </NavLink>
                       </form>
                     </div>
                   </div>
@@ -150,17 +150,14 @@ class Dashboard extends PureComponent {
                     </div>
                   </div>
                 </div> */}
-                {data &&
-                  data.map(o => (
-                    <OrderCard
-                      key={o.id}
-                      data={o}
-                      handleModal={this.handleModals}
-                      handleSelect={this.handleOrderSelection}
-                      statuses={this.props.statuses}
-                    />
-                  ))}
               </div>
+              {data.length > 0 && (
+                <OrderList
+                  orders={data}
+                  statuses={this.props.statuses}
+                  handleOrderSelection={this.handleOrderSelection}
+                />
+              )}
             </div>
           </section>
           <FooterContainer />

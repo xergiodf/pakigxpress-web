@@ -10,8 +10,11 @@ const withAuthorization = WrappedComponent => (
 const Routes = () => (
   <Switch>
     <Route exact path="/" render={() => withAuthorization(Dashboard)} />
-    <Route exact path="/new" component={NewOrder} />
-    <Route exact path="/calculate" component={Calculate} />
+    <Route
+      exact
+      path="/calculate"
+      render={() => withAuthorization(Calculate)}
+    />
     <Route exact path="/login" component={Login} />
     <Route exact path="/signup" component={Signup} />
   </Switch>
