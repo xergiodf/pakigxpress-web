@@ -3,19 +3,19 @@ import {
   USER_ORDERS_SUBMIT,
   ADMIN_ORDERS_REQUEST,
   USER_ORDER_UPDATE,
-  ADMIN_ORDER_UPDATE
+  ADMIN_ORDER_UPDATE,
 } from '../actions/actionTypes'
 
 const authUserOrdersRequest = payload => ({
   type: USER_ORDERS_REQUEST,
-  payload
+  payload,
 })
 
 const submitUserOrder = payload => ({ type: USER_ORDERS_SUBMIT, payload })
 
 const authAdminOrdersRequest = payload => ({
   type: ADMIN_ORDERS_REQUEST,
-  payload
+  payload,
 })
 
 const updateUserOrder = payload => ({ type: USER_ORDER_UPDATE, payload })
@@ -27,5 +27,5 @@ export {
   submitUserOrder,
   authAdminOrdersRequest,
   updateUserOrder,
-  updateAdminOrder
+  updateAdminOrder,
 }

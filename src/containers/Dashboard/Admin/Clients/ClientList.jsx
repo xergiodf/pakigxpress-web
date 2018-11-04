@@ -1,6 +1,8 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { filterArray } from '../../../../helpers/util'
+import { filterArray, sortArray } from '../../../../helpers/util'
+import Modal from '../../../../components/Modal/'
+import NewOrder from '../../../NewOrder'
 
 class ClientList extends PureComponent {
   static propTypes = {
@@ -10,12 +12,22 @@ class ClientList extends PureComponent {
   }
 
   state = {
+    showModal: false,
+    clientId: null,
     clients: this.tableData,
   }
 
   get tableData() {
     const { data } = this.props.clients
-    return data
+    return data.slice(0)
+  }
+
+  /**
+   * @description Open/Close modal
+   * @returns { Void }
+   */
+  handleClientNewOrder = clientId => {
+    this.setState({ showModal: !this.state.showModal, clientId })
   }
 
   /**
@@ -24,6 +36,11 @@ class ClientList extends PureComponent {
   handleSearch = term => {
     const data = this.tableData
     this.setState({ clients: filterArray(data, term) })
+  }
+
+  handleSort = opt => {
+    const data = this.tableData
+    this.setState({ clients: sortArray(data, opt) })
   }
 
   render() {
@@ -45,14 +62,12 @@ class ClientList extends PureComponent {
                 />
               </div>
               <div className="col-md-6">
-                <select>
+                <select onChange={e => this.handleSort(e.target.value)}>
                   <option selected="" value="Default">
                     Sort By
                   </option>
-                  <option value="Small">Customer A-Z</option>
-                  <option value="Medium">Customer Z-A</option>
-                  <option value="Larger">Oldest-Newest</option>
-                  <option value="Larger">Newest-Oldest</option>
+                  <option value="CUST_AZ">Customer A-Z</option>
+                  <option value="CUST_ZA">Customer Z-A</option>
                 </select>
               </div>
             </form>
@@ -84,7 +99,10 @@ class ClientList extends PureComponent {
                       <td>{c.address_2}</td>
                       <td>{`${c.city} / ${c.state} / ${c.zip}`}</td>
                       <td>
-                        <button className="btn btn-sm btn-filled">
+                        <button
+                          className="btn btn-sm btn-filled"
+                          onClick={() => this.handleClientNewOrder(c.id)}
+                        >
                           New Order
                         </button>
                       </td>
@@ -95,6 +113,14 @@ class ClientList extends PureComponent {
             </div>
           </div>
         </div>
+        <Modal
+          size="large"
+          visible={this.state.showModal}
+          onRequestToClose={() => this.handleClientNewOrder(null)}
+          closeKeys={['esc']}
+        >
+          <NewOrder id={this.state.clientId} />
+        </Modal>
       </Fragment>
     )
   }

@@ -1,7 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import format from '../../../../helpers/date'
-import { filterArray } from '../../../../helpers/util'
+import { filterArray, sortArray } from '../../../../helpers/util'
 import Modal from '../../../../components/Modal/Modal'
 import OrderForm from '../../OrderForm'
 
@@ -80,6 +80,11 @@ class OrderList extends PureComponent {
     this.setState({ orders: filterArray(data, term) })
   }
 
+  handleSort = opt => {
+    const data = this.tableData
+    this.setState({ orders: sortArray(data, opt) })
+  }
+
   render() {
     return (
       <Fragment>
@@ -99,14 +104,14 @@ class OrderList extends PureComponent {
                 />
               </div>
               <div className="col-md-6">
-                <select>
+                <select onChange={e => this.handleSort(e.target.value)}>
                   <option selected="" value="Default">
                     Sort By
                   </option>
-                  <option value="Small">Customer A-Z</option>
-                  <option value="Medium">Customer Z-A</option>
-                  <option value="Larger">Oldest-Newest</option>
-                  <option value="Larger">Newest-Oldest</option>
+                  <option value="CUST_AZ">Customer A-Z</option>
+                  <option value="CUST_ZA">Customer Z-A</option>
+                  <option value="DATE_NEW">Oldest-Newest</option>
+                  <option value="DATE_OLD">Newest-Oldest</option>
                 </select>
               </div>
             </form>

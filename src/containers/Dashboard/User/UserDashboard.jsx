@@ -76,19 +76,10 @@ class Dashboard extends PureComponent {
           <section className="bg-secondary">
             <div className="container">
               <div className="row">
-                <div className="col-sm-4">
+                <div className="col-sm-6">
                   <div className="feature feature-1 boxed">
                     <div className="text-left">
                       <h4 className="mb0">Account Info</h4>
-                      <button
-                        onClick={() =>
-                          this.handleModals({
-                            client: !this.state.showModal.client,
-                          })
-                        }
-                      >
-                        Edit Info
-                      </button>
                       <ul className="mt32">
                         <li>{client.full_name}</li>
                         <li>{email}</li>
@@ -99,10 +90,21 @@ class Dashboard extends PureComponent {
                           {client.city} {client.state} {client.zip}
                         </li>
                       </ul>
+                      <button
+                        onClick={() =>
+                          this.handleModals({
+                            client: !this.state.showModal.client,
+                          })
+                        }
+                        style={{ width: '100%' }}
+                        className="btn btn-lg btn-filled"
+                      >
+                        Edit Info
+                      </button>
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-4">
+                <div className="col-sm-6">
                   <div
                     className="feature feature-1 boxed"
                     style={{ minHeight: '300px' }}
@@ -125,7 +127,7 @@ class Dashboard extends PureComponent {
                     </div>
                   </div>
                 </div>
-                <div className="col-sm-4">
+                {/* <div className="col-sm-4">
                   <div
                     className="feature feature-1 boxed"
                     style={{ minHeight: '300px' }}
@@ -147,7 +149,7 @@ class Dashboard extends PureComponent {
                       </form>
                     </div>
                   </div>
-                </div>
+                </div> */}
                 {data &&
                   data.map(o => (
                     <OrderCard

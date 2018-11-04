@@ -34,4 +34,35 @@ const filterArray = (arr, searchKey) =>
     )
   )
 
-export { debounce, filterArray }
+function compareNames(a, b) {
+  if (a.full_name < b.full_name) return -1
+  if (a.full_name > b.full_name) return 1
+  return 0
+}
+
+function compareDates(a, b) {
+  if (Date(a.date_arrival) < Date(b.date_arrival)) return -1
+  if (Date(a.date_arrival) > Date(b.date_arrival)) return 1
+  return 0
+}
+
+const sortArray = (arr, opt) => {
+  switch (opt) {
+    case 'CUST_AZ':
+      return arr.sort(compareNames)
+
+    case 'CUST_ZA':
+      return arr.sort(compareNames).reverse()
+
+    case 'DATE_OLD':
+      return arr.sort(compareDates)
+
+    case 'DATE_NEW':
+      return arr.sort(compareDates).reverse()
+
+    default:
+      return arr
+  }
+}
+
+export { debounce, filterArray, sortArray }

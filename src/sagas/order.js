@@ -91,6 +91,7 @@ const submitUserOrder = function* submitUserOrder(action) {
         },
       })
       yield put({ type: USER_ORDERS_SUBMIT_SUCCESS, response })
+      yield put({ type: ADMIN_ORDERS_REQUEST })
     }
   } catch (e) {
     yield put({

@@ -8,7 +8,7 @@ const getOrdersByUser = () =>
 
 const postOrderByUser = payload =>
   request(
-    { url: 'orders/me', method: 'POST', data: { ...payload } },
+    { url: 'orders', method: 'POST', data: { ...payload } },
     { requestType: 'postOrderByUser' }
   )
 
@@ -39,5 +39,5 @@ export {
   getOrdersByAdmin,
   updateOrderByUser,
   updateOrderByAdmin,
-  getOrderSummary
+  getOrderSummary,
 }
