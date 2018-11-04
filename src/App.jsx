@@ -7,7 +7,7 @@ import Routes from './Routes'
 import Loader from './components/Loader/'
 
 class App extends PureComponent {
-  render () {
+  render() {
     return (
       <Fragment>
         {this.props.requestReducer.requesting && <Loader />}

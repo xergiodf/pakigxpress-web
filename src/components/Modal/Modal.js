@@ -10,7 +10,6 @@ const ModalOverlay = styled.div`
   justify-content: center;
 
   position: fixed;
-  z-index: 500;
   top: 0;
   bottom: 0;
   right: 0;
