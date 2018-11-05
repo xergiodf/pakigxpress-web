@@ -13,7 +13,7 @@ class OrderCard extends React.PureComponent {
       pay_status: PropTypes.string,
     }),
     id: PropTypes.number,
-    handleModal: PropTypes.func,
+    handleModals: PropTypes.func,
     handleSelect: PropTypes.func,
     statuses: PropTypes.shape({
       orders: PropTypes.array,
@@ -23,7 +23,7 @@ class OrderCard extends React.PureComponent {
 
   handleOrderSelection = () => {
     this.props.handleSelect(this.props.data.id)
-    this.props.handleModal({ order: true })
+    this.props.handleModals({ order: true })
   }
 
   render() {

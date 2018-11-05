@@ -93,8 +93,8 @@ class OrderList extends PureComponent {
               <OrderCard
                 key={o.id}
                 data={o}
-                handleModal={this.handleModals}
-                handleSelect={this.handleOrderSelection}
+                handleModals={this.props.handleModals}
+                handleSelect={this.props.handleOrderSelection}
                 statuses={this.props.statuses}
               />
             ))}

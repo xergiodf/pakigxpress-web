@@ -156,6 +156,7 @@ class Dashboard extends PureComponent {
                   orders={data}
                   statuses={this.props.statuses}
                   handleOrderSelection={this.handleOrderSelection}
+                  handleModals={this.handleModals}
                 />
               )}
             </div>
