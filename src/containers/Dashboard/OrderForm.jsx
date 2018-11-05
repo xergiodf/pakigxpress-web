@@ -2,7 +2,6 @@ import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
-import Select from '../../components/Dropdown'
 import format from '../../helpers/date'
 import { updateUserOrder, updateAdminOrder } from '../../actions/order'
 
@@ -68,6 +67,7 @@ class OrderForm extends PureComponent {
               type="text"
               className="validate-required validate-email"
               component="input"
+              disabled={data.auth && data.role !== 'admin'}
             />
             <Field
               id="destination"
@@ -76,6 +76,7 @@ class OrderForm extends PureComponent {
               type="text"
               className="validate-required validate-email"
               component="input"
+              disabled={data.auth && data.role !== 'admin'}
             />
             <Field
               id="pack_size"
@@ -84,6 +85,7 @@ class OrderForm extends PureComponent {
               type="text"
               className="validate-required validate-email"
               component="input"
+              disabled={data.auth && data.role !== 'admin'}
             />
             <Field
               id="pack_weight"
@@ -92,6 +94,7 @@ class OrderForm extends PureComponent {
               type="text"
               className="validate-required validate-email"
               component="input"
+              disabled={data.auth && data.role !== 'admin'}
             />
             <Field
               id="est_date_arriv"
@@ -100,36 +103,46 @@ class OrderForm extends PureComponent {
               type="date"
               className="validate-required validate-email"
               component="input"
+              disabled={data.auth && data.role !== 'admin'}
             />
             <Field
               id="status"
               placeholder="Package status"
               name="status"
-              component={Select}
-              options={orderStatus}
-              defaultValue={
-                orderStatus.filter(s => s.value === order.status)[0]
-              }
-              isDisabled={data.auth && data.role !== 'admin'}
-            />
+              component="select"
+              disabled={data.auth && data.role !== 'admin'}
+            >
+              <option />
+              {orderStatus.map(o => (
+                <option key={o.value} value={o.value}>
+                  {o.label}
+                </option>
+              ))}
+            </Field>
             <Field
               id="pay_status"
               placeholder="Payment status"
               name="pay_status"
-              component={Select}
-              options={paymentStatus}
-              defaultValue={
-                paymentStatus.filter(s => s.value === order.pay_status)[0]
-              }
-              isDisabled={data.auth && data.role !== 'admin'}
-            />
-            <button
-              style={{ width: '100%' }}
-              className="btn btn-lg btn-filled"
-              type="submit"
+              component="select"
+              disabled={data.auth && data.role !== 'admin'}
             >
-              Submit
-            </button>
+              <option />
+              {paymentStatus.map(p => (
+                <option key={p.value} value={p.value}>
+                  {p.label}
+                </option>
+              ))}
+            </Field>
+            {data.auth &&
+              data.role === 'admin' && (
+                <button
+                  style={{ width: '100%' }}
+                  className="btn btn-lg btn-filled"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              )}
           </form>
         </div>
       </Fragment>
