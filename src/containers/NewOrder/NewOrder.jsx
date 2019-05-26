@@ -27,14 +27,6 @@ class NewOrder extends PureComponent {
         <form className="form-email" onSubmit={handleSubmit(this.submit)}>
           <h6 className="uppercase text-center">New Order</h6>
           <Field
-            id="orig_track_number"
-            placeholder="Origin Tracking Number"
-            name="orig_track_number"
-            type="text"
-            className="validate-required validate-email"
-            component="input"
-          />
-          <Field
             id="destination"
             placeholder="Destination"
             name="destination"

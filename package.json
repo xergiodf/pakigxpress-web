@@ -7,8 +7,8 @@
     "dev": "cross-env NODE_ENV=development webpack-dev-server -d",
     "build": "cross-env NODE_ENV=production webpack -p",
     "test": "jest",
-    "format": "yarn prettier --config .prettierrc --write \"src/**/*.js*\"",
-    "lint": "yarn eslint --config .eslintrc --fix 'src/**/**/*.js' "
+    "format": "prettier --config .prettierrc --write \"src/**/*.js*\"",
+    "lint": "eslint --config .eslintrc --fix 'src/**/**/*.js' "
   },
   "keywords": [],
   "author": "",
@@ -78,6 +78,7 @@
     "react-hotkeys": "^1.1.4",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
+    "react-table": "^6.10.0",
     "react-toastify": "^4.2.0",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
