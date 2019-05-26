@@ -1,4 +1,4 @@
-import { take, fork, cancel, call, put, cancelled } from 'redux-saga/effects'
+import { take, fork, cancel, call, put } from 'redux-saga/effects'
 import {
   AUTH_REQUEST,
   AUTH_SUCCESS,
@@ -48,9 +48,6 @@ const loginFlow = function* loginFlow(action) {
 
     // Send error to redux
     yield put({ type: AUTH_ERROR, e })
-  } finally {
-    if (yield cancelled()) {
-    }
   }
 
   return response.token
