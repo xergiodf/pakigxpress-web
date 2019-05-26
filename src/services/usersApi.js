@@ -14,11 +14,11 @@ const signup = payload =>
         address_2: payload.address_2,
         city: payload.city,
         state: payload.state,
-        zip: payload.zip
-      }
+        zip: payload.zip,
+      },
     },
     {
-      requestType: 'signup'
+      requestType: 'signup',
     }
   )
 
@@ -29,12 +29,34 @@ const login = payload =>
       method: 'POST',
       data: {
         email: payload.email,
-        password: payload.password
-      }
+        password: payload.password,
+      },
     },
     {
-      requestType: 'login'
+      requestType: 'login',
     }
   )
 
-export { signup, login }
+const forgotPassword = ({ email }) =>
+  request(
+    {
+      url: `user/forgotPassword?email=${email}`,
+      method: 'GET',
+    },
+    { requestType: 'forgotPassword' }
+  )
+
+const resetPassword = ({ token, newPassword }) =>
+  request(
+    {
+      url: 'user/resetPassword',
+      method: 'POST',
+      data: {
+        token,
+        newPassword,
+      },
+    },
+    { requestType: 'resetPassword' }
+  )
+
+export { forgotPassword, login, resetPassword, signup }

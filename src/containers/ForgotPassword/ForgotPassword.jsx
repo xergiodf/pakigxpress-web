@@ -4,17 +4,17 @@ import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom'
 
-import { loginRequest } from '../../actions/session'
+import { forgotPassword } from '../../actions/user'
 
 import NavContainer from '../NavContainer'
 import FooterContainer from '../FooterContainer'
 
 import PageTitle from '../../components/PageTitle'
 
-class Login extends Component {
+class ForgotPassword extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func,
-    loginRequest: PropTypes.func,
+    forgotPassword: PropTypes.func,
     signup: PropTypes.shape({
       requesting: PropTypes.bool,
       successful: PropTypes.bool,
@@ -25,7 +25,7 @@ class Login extends Component {
    * Handles form submission with values
    */
   submit = values => {
-    this.props.loginRequest(values)
+    this.props.forgotPassword(values)
   }
 
   render() {
@@ -36,7 +36,7 @@ class Login extends Component {
         <Fragment>{this.props.me.data.auth && <Redirect to="/" />}</Fragment>
         <NavContainer transparent />
         <div className="main-container">
-          <PageTitle title="Login" />
+          <PageTitle title="Forgot Password" />
           <section>
             <div className="container">
               <div className="col-md-6 col-md-push-3">
@@ -44,7 +44,7 @@ class Login extends Component {
                   className="form-email"
                   onSubmit={handleSubmit(this.submit)}
                 >
-                  <h6 className="uppercase text-center">Log In</h6>
+                  <h6 className="uppercase text-center">Forgot Password</h6>
                   <Field
                     id="email"
                     placeholder="Email"
@@ -53,27 +53,18 @@ class Login extends Component {
                     className="validate-required validate-email"
                     component="input"
                   />
-                  <Field
-                    id="password"
-                    placeholder="Password"
-                    name="password"
-                    type="password"
-                    className="validate-required"
-                    component="input"
-                  />
                   <button
                     style={{ width: '100%' }}
                     className="btn btn-lg btn-filled"
                     type="submit"
                   >
-                    Log in
+                    Send recovery email
                   </button>
                 </form>
                 <div className="col-md-12 text-center">
                   <p>
                     <i>
-                      Forgot password?{' '}
-                      <NavLink to="/forgot-password">Click here</NavLink>
+                      <NavLink to="/login">Log in</NavLink>
                     </i>
                   </p>
                 </div>
@@ -101,13 +92,13 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  loginRequest: payload => dispatch(loginRequest(payload)),
+  forgotPassword: payload => dispatch(forgotPassword(payload)),
 })
 
 const connected = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Login)
+)(ForgotPassword)
 
 const formed = reduxForm({
   form: 'login',
