@@ -90,7 +90,7 @@ class Modal extends React.Component {
 
     return (
       <ModalOverlay
-        tabIndex={1}
+        tabIndex={0}
         onClick={this.handleRequestToClose}
         {...this.props}
       >

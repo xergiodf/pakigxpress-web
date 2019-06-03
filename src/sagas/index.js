@@ -5,7 +5,8 @@ import clientSaga from './client'
 import loginSaga from './login'
 import orderSaga from './order'
 import signupSaga from './signup'
-import StatusSaga from './statuses'
+import statusSaga from './statuses'
+import userSaga from './user'
 
 const watchSagas = function* watchSagas() {
   yield all([
@@ -14,7 +15,8 @@ const watchSagas = function* watchSagas() {
     fork(loginSaga),
     fork(orderSaga),
     fork(signupSaga),
-    fork(StatusSaga),
+    fork(statusSaga),
+    fork(userSaga),
   ])
 }
 

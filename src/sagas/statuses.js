@@ -1,4 +1,4 @@
-import { call, put, all, takeLatest, take } from 'redux-saga/effects'
+import { call, put, all, takeLatest } from 'redux-saga/effects'
 import {
   STATUS_ORDER_REQUEST,
   STATUS_ORDER_REQUEST_SUCCESS,

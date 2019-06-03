@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form'
 import { connect } from 'react-redux'
 import { Redirect, NavLink } from 'react-router-dom'
 
-import { loginRequest } from '../../actions/session'
+import { resetPassword } from '../../actions/user'
 
 import NavContainer from '../NavContainer'
 import FooterContainer from '../FooterContainer'
@@ -14,7 +14,7 @@ import PageTitle from '../../components/PageTitle'
 class Login extends Component {
   static propTypes = {
     handleSubmit: PropTypes.func,
-    loginRequest: PropTypes.func,
+    resetPassword: PropTypes.func,
     signup: PropTypes.shape({
       requesting: PropTypes.bool,
       successful: PropTypes.bool,
@@ -25,7 +25,10 @@ class Login extends Component {
    * Handles form submission with values
    */
   submit = values => {
-    this.props.loginRequest(values)
+    this.props.resetPassword({
+      ...values,
+      token: this.props.match.params.token,
+    })
   }
 
   render() {
@@ -44,19 +47,11 @@ class Login extends Component {
                   className="form-email"
                   onSubmit={handleSubmit(this.submit)}
                 >
-                  <h6 className="uppercase text-center">Log In</h6>
+                  <h6 className="uppercase text-center">Reset Password</h6>
                   <Field
-                    id="email"
-                    placeholder="Email"
-                    name="email"
-                    type="text"
-                    className="validate-required validate-email"
-                    component="input"
-                  />
-                  <Field
-                    id="password"
-                    placeholder="Password"
-                    name="password"
+                    id="newPassword"
+                    placeholder="New Password"
+                    name="newPassword"
                     type="password"
                     className="validate-required"
                     component="input"
@@ -66,14 +61,13 @@ class Login extends Component {
                     className="btn btn-lg btn-filled"
                     type="submit"
                   >
-                    Log in
+                    Reset Password
                   </button>
                 </form>
                 <div className="col-md-12 text-center">
                   <p>
                     <i>
-                      Forgot password?{' '}
-                      <NavLink to="/forgot-password">Click here</NavLink>
+                      <NavLink to="/login">Log in</NavLink>
                     </i>
                   </p>
                 </div>
@@ -101,7 +95,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  loginRequest: payload => dispatch(loginRequest(payload)),
+  resetPassword: payload => dispatch(resetPassword(payload)),
 })
 
 const connected = connect(

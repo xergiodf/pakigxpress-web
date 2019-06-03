@@ -1,5 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import ReactTable from 'react-table'
+import 'react-table/react-table.css'
 import format from '../../../../helpers/date'
 import { filterArray, sortArray } from '../../../../helpers/util'
 import Modal from '../../../../components/Modal/Modal'
@@ -86,6 +88,24 @@ class OrderList extends PureComponent {
   }
 
   render() {
+    const columns = [
+      {
+        Header: 'ORDER #',
+        accessor: 'id',
+        Cell: ({ value }) => (
+          <a href="#" onClick={() => this.handleOrderSelected(value)}>
+            {`[${value}]`}
+          </a>
+        ),
+      },
+      { Header: 'Status', accessor: 'status' },
+      { Header: 'Destination', accessor: 'destination' },
+      { Header: 'Cust #', accessor: 'client_id' },
+      { Header: 'Name', accessor: 'full_name' },
+      { Header: 'Date', accessor: 'date_arrival' },
+      { Header: 'Payment', accessor: 'pay_status' },
+    ]
+
     return (
       <Fragment>
         <hr />
@@ -148,43 +168,13 @@ class OrderList extends PureComponent {
               </li>
             </ul>
           </div>
+          {/* React table */}
           <div className="col-md-10">
-            <div className="table-responsive table-bordered">
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <th>ORDER #</th>
-                    <th>Status</th>
-                    <th>Destination</th>
-                    <th>Cust #</th>
-                    <th>Name</th>
-                    <th>Date</th>
-                    <th>Payment</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.orders.map(o => (
-                    <tr key={o.id}>
-                      <td>
-                        <a
-                          href="#"
-                          onClick={() => this.handleOrderSelected(o.id)}
-                        >
-                          {`[${o.id}] ${o.order_id ? o.order_id : ''}`}
-                        </a>
-                      </td>
-                      <td>{o.status}</td>
-                      <td>{o.destination}</td>
-                      <td>{o.client_id}</td>
-                      <td>{o.full_name}</td>
-                      <td>{o.date_arrival}</td>
-                      <td>{o.pay_status}</td>
-                      <td />
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <ReactTable
+              columns={columns}
+              data={this.state.orders}
+              defaultPageSize={10}
+            />
           </div>
         </div>
         <Modal

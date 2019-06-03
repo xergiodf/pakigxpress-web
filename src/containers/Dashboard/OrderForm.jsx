@@ -60,24 +60,18 @@ class OrderForm extends PureComponent {
         <div>
           <form className="form-email" onSubmit={handleSubmit(submit)}>
             <h6 className="uppercase text-center">Order #{order.id}</h6>
-            <Field
-              id="orig_track_number"
-              placeholder="Origin Tracking Number"
-              name="orig_track_number"
-              type="text"
-              className="validate-required validate-email"
-              component="input"
-              disabled={data.auth && data.role !== 'admin'}
-            />
+            <label htmlFor="destination">Destination</label>
             <Field
               id="destination"
               placeholder="Destination"
+              label="Destination"
               name="destination"
               type="text"
               className="validate-required validate-email"
               component="input"
               disabled={data.auth && data.role !== 'admin'}
             />
+            <label htmlFor="pack_size">Package Size</label>
             <Field
               id="pack_size"
               placeholder="Package Size"
@@ -87,6 +81,7 @@ class OrderForm extends PureComponent {
               component="input"
               disabled={data.auth && data.role !== 'admin'}
             />
+            <label htmlFor="pack_weight">Package Weight</label>
             <Field
               id="pack_weight"
               placeholder="Package Weight"
@@ -96,6 +91,9 @@ class OrderForm extends PureComponent {
               component="input"
               disabled={data.auth && data.role !== 'admin'}
             />
+            <label htmlFor="est_date_arriv">
+              Estimated Arrival Form Origin Shipper
+            </label>
             <Field
               id="est_date_arriv"
               placeholder="Estimated Arrival Form Origin Shipper"
@@ -105,6 +103,7 @@ class OrderForm extends PureComponent {
               component="input"
               disabled={data.auth && data.role !== 'admin'}
             />
+            <label htmlFor="status">Package status</label>
             <Field
               id="status"
               placeholder="Package status"
@@ -119,6 +118,7 @@ class OrderForm extends PureComponent {
                 </option>
               ))}
             </Field>
+            <label htmlFor="pay_status">Payment status</label>
             <Field
               id="pay_status"
               placeholder="Payment status"
@@ -133,16 +133,15 @@ class OrderForm extends PureComponent {
                 </option>
               ))}
             </Field>
-            {data.auth &&
-              data.role === 'admin' && (
-                <button
-                  style={{ width: '100%' }}
-                  className="btn btn-lg btn-filled"
-                  type="submit"
-                >
-                  Submit
-                </button>
-              )}
+            {data.auth && data.role === 'admin' && (
+              <button
+                style={{ width: '100%' }}
+                className="btn btn-lg btn-filled"
+                type="submit"
+              >
+                Submit
+              </button>
+            )}
           </form>
         </div>
       </Fragment>

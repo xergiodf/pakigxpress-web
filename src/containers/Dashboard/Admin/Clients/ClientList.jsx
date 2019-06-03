@@ -1,5 +1,7 @@
 import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
+import ReactTable from 'react-table'
+import 'react-table/react-table.css'
 import { filterArray, sortArray } from '../../../../helpers/util'
 import Modal from '../../../../components/Modal/'
 import NewOrder from '../../../NewOrder'
@@ -44,6 +46,36 @@ class ClientList extends PureComponent {
   }
 
   render() {
+    const columns = [
+      { Header: 'Customer #', accessor: 'id' },
+      { Header: 'Full Name', accessor: 'full_name' },
+      { Header: 'Phone', accessor: 'phone' },
+      { Header: 'Address Line 1', accessor: 'address_1' },
+      { Header: 'Address Line 2', accessor: 'address_2' },
+      {
+        id: 'city-state-zip',
+        Header: 'City / State / ZIP',
+        accessor: obj => ({
+          id: obj.id,
+          city: obj.city,
+          state: obj.state,
+          zip: obj.zip,
+        }),
+        Cell: ({ value }) => `${value.city} / ${value.state} / ${value.zip}`,
+      },
+      {
+        Header: '',
+        accessor: 'id',
+        Cell: ({ value }) => (
+          <button
+            className="btn btn-sm btn-filled"
+            onClick={() => this.handleClientNewOrder(value)}
+          >
+            New Order
+          </button>
+        ),
+      },
+    ]
     return (
       <Fragment>
         <hr />
@@ -76,41 +108,11 @@ class ClientList extends PureComponent {
         <hr />
         <div className="row">
           <div className="col-md-12">
-            <div className="table-responsive table-bordered">
-              <table className="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Customer #</th>
-                    <th>Full Name</th>
-                    <th>Phone</th>
-                    <th>Address Line 1</th>
-                    <th>Address Line 2</th>
-                    <th>City / State / ZIP</th>
-                    <th />
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.clients.map(c => (
-                    <tr key={c.id}>
-                      <td>{c.id}</td>
-                      <td>{c.full_name}</td>
-                      <td>{c.phone}</td>
-                      <td>{c.address_1}</td>
-                      <td>{c.address_2}</td>
-                      <td>{`${c.city} / ${c.state} / ${c.zip}`}</td>
-                      <td>
-                        <button
-                          className="btn btn-sm btn-filled"
-                          onClick={() => this.handleClientNewOrder(c.id)}
-                        >
-                          New Order
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+            <ReactTable
+              columns={columns}
+              data={this.state.clients}
+              defaultPageSize={10}
+            />
           </div>
         </div>
         <Modal
