@@ -47,7 +47,11 @@ class ClientList extends PureComponent {
 
   render() {
     const columns = [
-      { Header: 'Customer #', accessor: 'id' },
+      {
+        Header: 'Customer #',
+        accessor: 'id',
+        Cell: ({ value }) => `${value.toString(16)}`,
+      },
       { Header: 'Full Name', accessor: 'full_name' },
       { Header: 'Phone', accessor: 'phone' },
       { Header: 'Address Line 1', accessor: 'address_1' },
@@ -121,7 +125,10 @@ class ClientList extends PureComponent {
           onRequestToClose={() => this.handleClientNewOrder(null)}
           closeKeys={['esc']}
         >
-          <NewOrder id={this.state.clientId} />
+          <NewOrder
+            id={this.state.clientId}
+            onSubmit={() => this.setState({ showModal: false })}
+          />
         </Modal>
       </Fragment>
     )

@@ -94,13 +94,17 @@ class OrderList extends PureComponent {
         accessor: 'id',
         Cell: ({ value }) => (
           <a href="#" onClick={() => this.handleOrderSelected(value)}>
-            {`[${value}]`}
+            {`[${value.toString(16)}]`}
           </a>
         ),
       },
       { Header: 'Status', accessor: 'status' },
       { Header: 'Destination', accessor: 'destination' },
-      { Header: 'Cust #', accessor: 'client_id' },
+      {
+        Header: 'Cust #',
+        accessor: 'client_id',
+        Cell: ({ value }) => `${value.toString(16)}`,
+      },
       { Header: 'Name', accessor: 'full_name' },
       { Header: 'Date', accessor: 'date_arrival' },
       { Header: 'Payment', accessor: 'pay_status' },

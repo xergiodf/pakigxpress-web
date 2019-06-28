@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
 import format from '../../helpers/date'
 import { updateUserOrder, updateAdminOrder } from '../../actions/order'
+import destinations from '../../helpers/order-destinations'
 
 class OrderForm extends PureComponent {
   state = {
@@ -29,11 +30,10 @@ class OrderForm extends PureComponent {
   }
 
   render() {
-    const { statuses } = this.props
+    const { statuses, handleSubmit } = this.props
     const order = this.props.data.filter(o => o.id === this.state.id)[0]
     if (!order) return 'No order selected'
 
-    const { handleSubmit } = this.props
     const { data } = this.props.me
     const submit = values => {
       if (data.auth) {
@@ -64,13 +64,19 @@ class OrderForm extends PureComponent {
             <Field
               id="destination"
               placeholder="Destination"
-              label="Destination"
               name="destination"
-              type="text"
-              className="validate-required validate-email"
-              component="input"
+              component="select"
               disabled={data.auth && data.role !== 'admin'}
-            />
+            >
+              <option disabled value="">
+                Destination
+              </option>
+              {destinations.map((d, i) => (
+                <option key={`${d - i}`} value={d}>
+                  {d}
+                </option>
+              ))}
+            </Field>
             <label htmlFor="pack_size">Package Size</label>
             <Field
               id="pack_size"

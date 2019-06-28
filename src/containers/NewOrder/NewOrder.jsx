@@ -2,8 +2,8 @@ import React, { PureComponent, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { reduxForm, Field } from 'redux-form'
-
 import { submitUserOrder } from '../../actions/order'
+import destinations from '../../helpers/order-destinations'
 
 class NewOrder extends PureComponent {
   static propTypes = {
@@ -11,6 +11,7 @@ class NewOrder extends PureComponent {
     handleSubmit: PropTypes.func,
     submitUserOrder: PropTypes.func,
     newOrder: PropTypes.shape({}),
+    onSubmit: PropTypes.func,
   }
 
   /**
@@ -18,6 +19,7 @@ class NewOrder extends PureComponent {
    */
   submit = values => {
     this.props.submitUserOrder({ client_id: this.props.id, ...values })
+    this.props.onSubmit()
   }
 
   render() {
@@ -30,10 +32,17 @@ class NewOrder extends PureComponent {
             id="destination"
             placeholder="Destination"
             name="destination"
-            type="text"
-            className="validate-required validate-email"
-            component="input"
-          />
+            component="select"
+          >
+            <option disabled value="">
+              Destination
+            </option>
+            {destinations.map((d, i) => (
+              <option key={`${d - i}`} value={d}>
+                {d}
+              </option>
+            ))}
+          </Field>
           <Field
             id="pack_size"
             placeholder="Package Size"

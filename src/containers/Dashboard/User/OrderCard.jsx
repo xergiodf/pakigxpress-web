@@ -44,8 +44,10 @@ class OrderCard extends React.PureComponent {
               </button>
               <h4>
                 <b>Order #:</b>{' '}
-                {`[${this.props.data.id}] ${
-                  this.props.data.order_id ? this.props.data.order_id : ''
+                {`[${this.props.data.id.toString(16)}] ${
+                  this.props.data.order_id
+                    ? this.props.data.order_id.toString(16)
+                    : ''
                 }`}{' '}
                 | <b>Orig Tracking #:</b> {this.props.data.orig_track_number}
               </h4>

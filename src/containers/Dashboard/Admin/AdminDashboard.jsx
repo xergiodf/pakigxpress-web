@@ -62,7 +62,7 @@ class AdminDashboard extends PureComponent {
         <div className="col-sm-3 text-center">
           <div className="feature bordered mb30">
             <h1 className="large">{summary.processingOrders}</h1>
-            <h5 className="uppercase">Processing Orders</h5>
+            <h5 className="uppercase">Orders in transit</h5>
           </div>
         </div>
         <div className="col-sm-3 text-center">

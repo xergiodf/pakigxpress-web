@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
 import NavContainer from '../NavContainer'
 import FooterContainer from '../FooterContainer'
-import cover from '../../assets/img/home2.jpg'
+import cover from '../../assets/img/home4.jpg'
 
 const Calculate = ({ me }) => (
   <Fragment>
@@ -20,10 +20,7 @@ const Calculate = ({ me }) => (
             <div className="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
               <div className="feature bordered text-center">
                 <h3 className="uppercase">Calculate Your Package</h3>
-                <p>
-                  Enter in the information below to recieve an estmiate for the
-                  cost of shipping your package
-                </p>
+                <p>Estimate Only</p>
                 <form className="halves form-newsletter">
                   <input
                     className="mb16 validate-required validate-email signup-email-field"
